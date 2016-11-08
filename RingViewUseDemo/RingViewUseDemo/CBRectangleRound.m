@@ -64,12 +64,59 @@
 }
 
 -(void)initUI{
-    self.backgroundColor = [UIColor whiteColor];
+    self.backgroundColor = [UIColor yellowColor];
     self.isClockwise = YES;
 }
 
+
+
 -(void)drawRect:(CGRect)rect{
     
+//    [self configRingViewWithRect:rect];
+    
+//    [self testBezierViewInRect:rect];
+    
+    [self testBezierViewInRect1:rect];
+}
+
+#pragma mark - 添加各种形状曲线图
+#define pi 3.14159265359
+#define   DEGREES_TO_RADIANS(degrees)  ((pi * degrees)/ 180)
+
+//画出一小段圆弧
+- (void)testBezierViewInRect:(CGRect)rect
+{
+    //加在View的图层上面进行操作, 只有在这个方法中执行  - (void)drawRect:(CGRect)rect
+    UIColor *color = [UIColor redColor];
+    [color set]; //设置线条颜色
+    UIBezierPath* aPath = [UIBezierPath bezierPathWithArcCenter:CGPointMake(self.frame.size.width*0.5, self.frame.size.height*0.5)
+                                                         radius:50
+                                                     startAngle:0
+                                                       endAngle:DEGREES_TO_RADIANS(135)
+                                                      clockwise:YES];
+    
+    aPath.lineWidth = 5.0;
+    aPath.lineCapStyle = kCGLineCapRound; //线条拐角
+    aPath.lineJoinStyle = kCGLineCapRound; //终点处理
+    [aPath stroke];
+}
+
+//画出一个部分圆角图形
+- (void)testBezierViewInRect1:(CGRect)rect
+{
+    UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height) byRoundingCorners:UIRectCornerBottomLeft|UIRectCornerBottomRight cornerRadii:CGSizeMake(10, 10)];
+    CAShapeLayer *layer = [CAShapeLayer layer];
+    layer.path = path.CGPath;
+    layer.fillColor = [UIColor clearColor].CGColor;
+    layer.strokeColor = [UIColor redColor].CGColor;
+    [self.layer addSublayer:layer];
+    
+}
+
+
+#pragma mark --------
+- (void)configRingViewWithRect:(CGRect)rect
+{
     //背景留白
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetFillColorWithColor(context, [UIColor whiteColor].CGColor);
@@ -80,52 +127,52 @@
     CGFloat centerX = self.frame.size.width/2;
     CGFloat centerY = self.frame.size.height/2;
     
-        for(int i=0; i<15; i++){
-            UIBezierPath *beizerPath = [UIBezierPath bezierPath];
-            //设置绘制线条的颜色及宽度
-            [[UIColor whiteColor] setStroke];
-            beizerPath.lineWidth = 3;
-            //设置填充的颜色
-            if(self.currentPoint == 0){
-                 [CB_COLOR_GRAY setFill];
-            }else{
-                if(self.isClockwise){
-                    if(i < self.currentPoint){
-                        [self.topicColor setFill];
-                    }else{
-                        [CB_COLOR_GRAY setFill];
-                    }
+    for(int i=0; i<15; i++){
+        UIBezierPath *beizerPath = [UIBezierPath bezierPath];
+        //设置绘制线条的颜色及宽度
+        [[UIColor whiteColor] setStroke];
+        beizerPath.lineWidth = 3;
+        //设置填充的颜色
+        if(self.currentPoint == 0){
+            [CB_COLOR_GRAY setFill];
+        }else{
+            if(self.isClockwise){
+                if(i < self.currentPoint){
+                    [self.topicColor setFill];
                 }else{
-                    if(i < self.currentPoint + 15){
-                        [CB_COLOR_GRAY setFill];
-                    }else{
-                        [self.topicColor setFill];
-                    }
+                    [CB_COLOR_GRAY setFill];
+                }
+            }else{
+                if(i < self.currentPoint + 15){
+                    [CB_COLOR_GRAY setFill];
+                }else{
+                    [self.topicColor setFill];
                 }
             }
-            CGFloat r = self.frame.size.height/2;
-            startAngle = -M_PI/2   + M_PI/15.0 * i *2;
-            endAngle = -M_PI/2 +M_PI /15.0 * 2 + M_PI/15.0 * i * 2;
-            [beizerPath addArcWithCenter:CGPointMake(centerX, centerY) radius:r startAngle:startAngle endAngle:endAngle clockwise:YES];
-            [beizerPath addLineToPoint:CGPointMake(centerX, centerY)];
-            [beizerPath closePath];
-            
-            [beizerPath stroke];
-            [beizerPath fill];
-            
-            
-            //画出白色的圆环遮挡
-            UIBezierPath *beizerPath2 = [UIBezierPath bezierPath];
-            CGFloat r2 = self.frame.size.height*5/12;
-            [[UIColor whiteColor] set];
-            beizerPath2.lineWidth = 3;
-            [beizerPath2 addArcWithCenter:CGPointMake(centerX, centerY) radius:r2 startAngle:startAngle endAngle:endAngle clockwise:YES];
-            [beizerPath2 addLineToPoint:CGPointMake(centerX, centerY)];
-            [beizerPath2 closePath];
-            [beizerPath2 stroke];
-            [beizerPath2 fill];
         }
-
+        CGFloat r = self.frame.size.height/2;
+        startAngle = -M_PI/2   + M_PI/15.0 * i *2;
+        endAngle = -M_PI/2 +M_PI /15.0 * 2 + M_PI/15.0 * i * 2;
+        [beizerPath addArcWithCenter:CGPointMake(centerX, centerY) radius:r startAngle:startAngle endAngle:endAngle clockwise:YES];
+        [beizerPath addLineToPoint:CGPointMake(centerX, centerY)];
+        [beizerPath closePath];
+        
+        [beizerPath stroke];
+        [beizerPath fill];
+        
+        
+        //画出白色的圆环遮挡
+        UIBezierPath *beizerPath2 = [UIBezierPath bezierPath];
+        CGFloat r2 = self.frame.size.height*5/12;
+        [[UIColor whiteColor] set];
+        beizerPath2.lineWidth = 3;
+        [beizerPath2 addArcWithCenter:CGPointMake(centerX, centerY) radius:r2 startAngle:startAngle endAngle:endAngle clockwise:YES];
+        [beizerPath2 addLineToPoint:CGPointMake(centerX, centerY)];
+        [beizerPath2 closePath];
+        [beizerPath2 stroke];
+        [beizerPath2 fill];
+    }
+    
     
     //中间的圆环
     CGFloat r = self.frame.size.height/3;
@@ -133,7 +180,7 @@
     if(self.point == 0){
         [CB_COLOR_GRAY setFill];
     }else{
-         [self.topicColor setFill];
+        [self.topicColor setFill];
     }
     [beizerPath addArcWithCenter:CGPointMake(centerX, centerY) radius:r startAngle:0 endAngle:M_PI*2 clockwise:YES];
     [beizerPath fill];
@@ -170,9 +217,9 @@
     self.titleLabel.text = self.mainTitle;
     self.subTitleLabel.text = self.subTitle;
     [self.titleLabel setAdjustsFontSizeToFitWidth:YES];
-     [self.subTitleLabel
-      setAdjustsFontSizeToFitWidth:YES];
-   
+    [self.subTitleLabel
+     setAdjustsFontSizeToFitWidth:YES];
+    
     
     if(self.realPoint >0){
         self.leftLabel.text = @"+";
@@ -181,7 +228,8 @@
     }else{
         self.leftLabel.text = @"";
     }
-
+    
+    
 }
 
 

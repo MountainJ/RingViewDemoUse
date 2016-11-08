@@ -14,4 +14,7 @@
 -(void)setPoint:(CGFloat)point Title:(NSString *)title;
 
 -(void)setPoint:(CGFloat)point Title:(NSString *)title withAnimation:(BOOL)isAnimated;
+
+
+
 @end

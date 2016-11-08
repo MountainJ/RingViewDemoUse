@@ -29,7 +29,24 @@
     // Do any additional setup after loading the view, typically from a nib.
     
     self.view.backgroundColor = [UIColor yellowColor];
+    //
+//    [self addRingView];
     
+    [self testBezierView];
+    
+}
+
+
+#pragma mark -TEST
+- (void)testBezierView
+{
+    CBRectangleRound *roundView = [[CBRectangleRound alloc] initWithFrame:CGRectMake(Margin, 200, ROUND_VIEW_HEIGHT, ROUND_VIEW_HEIGHT)];
+    [self.view addSubview:roundView];
+}
+
+#pragma mark -
+- (void)addRingView
+{
     CBRectangleRound *roundView1 = [[CBRectangleRound alloc] initWithFrame:CGRectMake(Margin, 100, ROUND_VIEW_HEIGHT, ROUND_VIEW_HEIGHT)];
     [self.view addSubview:roundView1];
     [roundView1 setPoint:-12 Title:@"测试圆环1" withAnimation:YES];
@@ -46,9 +63,7 @@
     [self.view addSubview:roundView];
     [roundView setPoint:+10 Title:@"测试圆环4" withAnimation:YES];
 
-    
 }
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

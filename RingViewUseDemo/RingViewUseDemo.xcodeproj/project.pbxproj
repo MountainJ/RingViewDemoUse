@@ -447,6 +447,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = AG7FPKU77S;
 				INFOPLIST_FILE = RingViewUseDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.kkol.RingViewUseDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -459,6 +460,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = AG7FPKU77S;
 				INFOPLIST_FILE = RingViewUseDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.kkol.RingViewUseDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -534,6 +536,7 @@
 				7B7FB8981DD06BFA00827362 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7B7FB8991DD06BFA00827362 /* Build configuration list for PBXNativeTarget "RingViewUseDemoTests" */ = {
 			isa = XCConfigurationList;
@@ -542,6 +545,7 @@
 				7B7FB89B1DD06BFA00827362 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7B7FB89C1DD06BFA00827362 /* Build configuration list for PBXNativeTarget "RingViewUseDemoUITests" */ = {
 			isa = XCConfigurationList;
@@ -550,6 +554,7 @@
 				7B7FB89E1DD06BFA00827362 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
